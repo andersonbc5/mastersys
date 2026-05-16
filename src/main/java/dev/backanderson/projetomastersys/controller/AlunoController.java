@@ -29,7 +29,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public AlunoResponse buscarPorId(@PathVariable Long id) {
+    public AlunoResponse buscarPorId(@PathVariable("id") Long id) {
         return service.buscarPorId(id);
     }
 
@@ -41,7 +41,7 @@ public class AlunoController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable Long id) {
+    public void excluir(@PathVariable("id") Long id) {
         service.excluir(id);
     }
 

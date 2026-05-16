@@ -39,7 +39,7 @@ public class Aluno {
     private String celular;
 
     @Email
-    @Column(length = 150, nullable = false)
+    @Column(length = 150, nullable = false, unique = true)
     private String email;
 
     private String observacao;
@@ -67,6 +67,7 @@ public class Aluno {
     @PrePersist
     public void prePersist() {
         criadoEm = LocalDateTime.now();
+        atualizadoEm = LocalDateTime.now();
     }
 
     @PreUpdate

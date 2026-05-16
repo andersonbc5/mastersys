@@ -3,6 +3,8 @@ package dev.backanderson.projetomastersys.service;
 import dev.backanderson.projetomastersys.domain.Aluno;
 import dev.backanderson.projetomastersys.dto.AlunoRequest;
 import dev.backanderson.projetomastersys.dto.AlunoResponse;
+import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
+import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,7 +19,7 @@ public class AlunoService {
 
     public AlunoResponse cadastrar(AlunoRequest alunoRequest) {
         if (alunoRequest.email() != null && repository.existsByEmail(alunoRequest.email())) {
-            throw new RuntimeException("Ja existe um aluno com esse email");
+            throw new RegraDeNegocioException("Ja existe um aluno com esse email");
         }
 
         Aluno aluno = alunoRequest.toEntity();
@@ -32,19 +34,22 @@ public class AlunoService {
     public AlunoResponse buscarPorId(Long id){
         return repository.findById(id)
                 .map(AlunoResponse::fromEntity)
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado"));
     }
 
     public AlunoResponse atualizar(Long id, AlunoRequest request){
         Aluno aluno = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado"));
 
         request.preencher(aluno);
         Aluno alunoSalvo = repository.save(aluno);
         return AlunoResponse.fromEntity(alunoSalvo);
     }
 
-    public void excluir(Long id){
-        repository.deleteById(id);
+    public void excluir(Long id) {
+        Aluno aluno = repository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado com id: " + id));
+
+        repository.delete(aluno);
     }
 }
