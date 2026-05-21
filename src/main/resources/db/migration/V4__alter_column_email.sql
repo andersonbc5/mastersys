@@ -1,0 +1,2 @@
+ALTER TABLE alunos
+    ALTER COLUMN email SET NOT NULL;

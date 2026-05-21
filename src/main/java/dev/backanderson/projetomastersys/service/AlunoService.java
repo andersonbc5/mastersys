@@ -1,11 +1,13 @@
 package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
+import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
 import dev.backanderson.projetomastersys.dto.AlunoRequest;
 import dev.backanderson.projetomastersys.dto.AlunoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;
+import dev.backanderson.projetomastersys.specification.AlunoSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +29,9 @@ public class AlunoService {
         return AlunoResponse.fromEntity(alunoSalvo);
     }
 
-    public Page<AlunoResponse> listar(Pageable pageable){
-        return  repository.findAll(pageable).map(AlunoResponse::fromEntity);
+    public Page<AlunoResponse> listar(AlunoFiltroRequest filtroRequest, Pageable pageable){
+        return  repository.findAll(AlunoSpecification.comFiltros(filtroRequest), pageable)
+                .map(AlunoResponse::fromEntity);
     }
 
     public AlunoResponse buscarPorId(Long id){

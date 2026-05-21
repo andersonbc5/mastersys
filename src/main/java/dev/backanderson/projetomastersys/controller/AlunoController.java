@@ -1,5 +1,6 @@
 package dev.backanderson.projetomastersys.controller;
 
+import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
 import dev.backanderson.projetomastersys.dto.AlunoRequest;
 import dev.backanderson.projetomastersys.dto.AlunoResponse;
 import dev.backanderson.projetomastersys.service.AlunoService;
@@ -24,8 +25,8 @@ public class AlunoController {
     }
 
     @GetMapping
-    public Page<AlunoResponse> listar(Pageable pageable) {
-        return service.listar(pageable);
+    public Page<AlunoResponse> listar(AlunoFiltroRequest filtroRequest, Pageable pageable) {
+        return service.listar(filtroRequest, pageable);
     }
 
     @GetMapping("/{id}")
