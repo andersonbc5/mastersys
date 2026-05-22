@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record AlunoResponse(
         Long id,
         String nome,
+        String cpf,
         LocalDate dataNascimento,
         String sexo,
         String celular,
@@ -22,6 +23,7 @@ public record AlunoResponse(
         return new AlunoResponse(
                 aluno.getId(),
                 aluno.getNome(),
+                aluno.getCpf(),
                 aluno.getDataNascimento(),
                 aluno.getSexo(),
                 aluno.getCelular(),

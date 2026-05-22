@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
@@ -27,6 +28,9 @@ public class Aluno {
     @NotBlank
     @Column(length = 150, nullable = false)
     private String nome;
+
+    @Column(name = "cpf", length = 14, nullable = false, unique = true)
+    private String cpf;
 
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;

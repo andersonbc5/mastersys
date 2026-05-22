@@ -1,0 +1,2 @@
+ALTER TABLE alunos
+    ADD COLUMN cpf VARCHAR(14) UNIQUE;

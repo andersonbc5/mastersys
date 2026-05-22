@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,10 @@ public record AlunoRequest(
         @NotBlank(message = "Nome é obrigatório")
         @Size(max = 150, message = "Nome deve ter no máximo 150 caracteres")
         String nome,
+
+        @CPF(message = "CPF inválido")
+        @NotBlank(message = "CPF é obrigatório")
+        String cpf,
 
         @Past(message = "Data de nascimento deve ser no passado")
         LocalDate dataNascimento,
@@ -60,6 +65,7 @@ public record AlunoRequest(
 
     public void preencher(Aluno aluno){
         aluno.setNome(nome);
+        aluno.setCpf(cpf);
         aluno.setDataNascimento(dataNascimento);
         aluno.setSexo(sexo);
         aluno.setTelefone(telefone);
