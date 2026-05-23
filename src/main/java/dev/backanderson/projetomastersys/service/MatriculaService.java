@@ -37,19 +37,19 @@ public class MatriculaService {
         matricula.setAluno(aluno);
         matricula.setDiaVencimento(matriculaRequest.diaVencimento());
 
-        return MatriculaResponse.fromEntitu(matriculaRepository.save(matricula));
+        return MatriculaResponse.fromEntity(matriculaRepository.save(matricula));
 
     }
 
     public Page<MatriculaResponse> listar(MatriculaFiltroRequest filtroRequest, Pageable pageable) {
         return matriculaRepository.findAll(MatriculaSpecification.comFiltros(filtroRequest), pageable)
-                .map(MatriculaResponse::fromEntitu);
+                .map(MatriculaResponse::fromEntity);
     }
 
 
     public MatriculaResponse buscarPorId(Long id) {
         return matriculaRepository.findById(id)
-                .map(MatriculaResponse::fromEntitu)
+                .map(MatriculaResponse::fromEntity)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));
     }
 
@@ -57,16 +57,15 @@ public class MatriculaService {
         Matricula matricula = matriculaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));
 
-        if (!matricula.getStatus().name().equals("ATIVA")) {
+        if (matricula.getStatus() == StatusMatricula.ATIVA) {
             throw new RegraDeNegocioException("Apenas matrículas ativas podem ser encerradas");
         }
 
         matricula.setStatus(StatusMatricula.ENCERRADA);
         matricula.setDataEncerramento(LocalDate.now());
 
-        matriculaRepository.save(matricula);
 
-        return MatriculaResponse.fromEntitu(matriculaRepository.save(matricula));
+        return MatriculaResponse.fromEntity(matriculaRepository.save(matricula));
     }
 
     public MatriculaResponse cancelarMatricula(Long id) {
@@ -80,7 +79,7 @@ public class MatriculaService {
         matricula.setStatus(StatusMatricula.CANCELADA);
         matricula.setDataEncerramento(LocalDate.now());
 
-        return MatriculaResponse.fromEntitu(matriculaRepository.save(matricula));
+        return MatriculaResponse.fromEntity(matriculaRepository.save(matricula));
     }
 
 

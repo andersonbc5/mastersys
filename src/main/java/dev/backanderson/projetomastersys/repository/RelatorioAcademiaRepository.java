@@ -15,7 +15,7 @@ public interface RelatorioAcademiaRepository extends Repository<FaturaMatricula,
             value = """
                     SELECT 
                             TO_CHAR(data_vencimento, 'YYYY-MM') AS mes,
-                            SUM(valor) AS total
+                            SUM(valor) AS valor
                     FROM faturas_matriculas
                     WHERE status = 'PAGA'
                     GROUP BY TO_CHAR(data_vencimento, 'YYYY-MM')

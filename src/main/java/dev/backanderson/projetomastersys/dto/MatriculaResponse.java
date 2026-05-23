@@ -15,7 +15,7 @@ public record MatriculaResponse(
         String status
 ) {
 
-    public static MatriculaResponse fromEntitu(Matricula matricula){
+    public static MatriculaResponse fromEntity(Matricula matricula){
         return new MatriculaResponse(
                 matricula.getId(),
                 matricula.getAluno().getId(),

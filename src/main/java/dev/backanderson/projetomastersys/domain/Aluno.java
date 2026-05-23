@@ -25,7 +25,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+
     @Column(length = 150, nullable = false)
     private String nome;
 
@@ -42,7 +42,7 @@ public class Aluno {
 
     private String celular;
 
-    @Email
+
     @Column(length = 150, nullable = false, unique = true)
     private String email;
 
