@@ -1,6 +1,8 @@
 package dev.backanderson.projetomastersys.exception;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     //400
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -90,6 +94,8 @@ public class GlobalExceptionHandler {
     //Erro 500
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErroResponse> tratarErroGenerico(Exception ex) {
+        log.error("Erro interno do servidor", ex);
+
         ErroResponse erroResponse = new ErroResponse(
                 LocalDateTime.now(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
