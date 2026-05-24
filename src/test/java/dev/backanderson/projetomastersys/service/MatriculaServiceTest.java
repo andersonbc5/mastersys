@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -33,12 +35,13 @@ class MatriculaServiceTest {
     void cadastrar() {
 
         MatriculaRequest request = new MatriculaRequest(
-                1L,
+                "47233289808",
                 10
         );
 
         Aluno aluno = new Aluno();
         aluno.setId(1L);
+        aluno.setCpf("47233289808");
 
 
         Matricula matricula = new Matricula();
@@ -46,8 +49,8 @@ class MatriculaServiceTest {
         matricula.setDiaVencimento(10);
         matricula.setAluno(aluno);
 
-        when(alunoRepository.findById(anyLong()))
-                .thenReturn(java.util.Optional.of(aluno));
+        when(alunoRepository.findByCpf(request.cpfAluno()))
+                .thenReturn(Optional.of(aluno));
 
 
         when(repository.save(any(Matricula.class)))

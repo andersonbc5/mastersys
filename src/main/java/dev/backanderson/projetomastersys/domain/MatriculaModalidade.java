@@ -34,7 +34,7 @@ public class MatriculaModalidade {
     private Modalidade modalidade;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "graduacao_id", nullable = false)
+    @JoinColumn(name = "graduacao_id", nullable = true)
     private Graduacao graduacao;
 
     @ManyToOne(fetch = FetchType.LAZY)

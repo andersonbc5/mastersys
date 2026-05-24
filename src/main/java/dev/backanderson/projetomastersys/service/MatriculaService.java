@@ -60,7 +60,7 @@ public class MatriculaService {
         Matricula matricula = matriculaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));
 
-        if (matricula.getStatus() == StatusMatricula.ATIVA) {
+        if (matricula.getStatus() != StatusMatricula.ATIVA) {
             throw new RegraDeNegocioException("Apenas matrículas ativas podem ser encerradas");
         }
 

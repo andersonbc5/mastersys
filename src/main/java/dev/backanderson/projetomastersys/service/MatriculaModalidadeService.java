@@ -27,7 +27,7 @@ public class MatriculaModalidadeService {
 
     public MatriculaModalidadeResponse adicionar(MatriculaModalidadeRequest request) {
         Matricula matricula = matriculaRepository.findById(request.matriculaId())
-                .orElseThrow(() -> new RuntimeException("Matrícula não encontrada com id: " + request.matriculaId()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + request.matriculaId()));
 
         if (matricula.getStatus() != StatusMatricula.ATIVA) {
             throw new RegraDeNegocioException("Matrícula deve estar ativa para adicionar uma modalidade");
@@ -39,7 +39,7 @@ public class MatriculaModalidadeService {
         }
 
         Modalidade modalidade = modalidadeRepository.findById(request.modalidadeId())
-                .orElseThrow(() -> new RuntimeException("Modalidade não encontrada com id: " + request.modalidadeId()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + request.modalidadeId()));
 
         if (!modalidade.isAtiva()) {
             throw new RegraDeNegocioException("Modalidade deve estar ativa para ser adicionada a matrícula");
@@ -138,9 +138,5 @@ public class MatriculaModalidadeService {
                 .map(MatriculaModalidadeResponse::fromEntity);
     }
 
-    public List<MatriculaModalidadeResponse> listarTodos() {
-        return matriculaModalidadeRepository.findAll()
-                .stream()
-                .map(MatriculaModalidadeResponse::fromEntity).toList();
-    }
+
 }
