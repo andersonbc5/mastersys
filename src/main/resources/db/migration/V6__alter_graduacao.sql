@@ -1,0 +1,1 @@
+ALTER TABLE matriculas_modalidade ALTER COLUMN graduacao_id DROP NOT NULL;

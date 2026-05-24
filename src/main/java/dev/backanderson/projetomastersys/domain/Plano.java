@@ -26,7 +26,7 @@ public class Plano {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "modalidade_id", nullable = false)
-    private Modadlidade modalidade;
+    private Modalidade modalidade;
 
     @Column(nullable = false)
     private boolean ativo = true;

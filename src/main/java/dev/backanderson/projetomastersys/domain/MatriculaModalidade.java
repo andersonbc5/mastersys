@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.sql.results.graph.entity.internal.EntityFetchJoinedImpl;
 
 import java.time.LocalDate;
 
@@ -32,7 +31,7 @@ public class MatriculaModalidade {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "modalidade_id", nullable = false)
-    private Modadlidade modalidade;
+    private Modalidade modalidade;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "graduacao_id", nullable = false)

@@ -21,7 +21,7 @@ public class Graduacao {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "modalidade_id", nullable = false)
-    private Modadlidade modalidade;
+    private Modalidade modalidade;
 
 
 

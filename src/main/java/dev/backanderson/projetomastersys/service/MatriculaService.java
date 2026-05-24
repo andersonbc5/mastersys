@@ -12,6 +12,7 @@ import dev.backanderson.projetomastersys.repository.AlunoRepository;
 import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.specification.MatriculaSpecification;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,19 +20,21 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MatriculaService {
 
     private final MatriculaRepository matriculaRepository;
     private final AlunoRepository alunoRepository;
 
     public MatriculaResponse cadastrar(MatriculaRequest matriculaRequest) {
-        if (matriculaRepository.existsByAlunoIdAndStatus(matriculaRequest.alunoId(), StatusMatricula.ATIVA)) {
+
+        Aluno aluno = alunoRepository.findByCpf(matriculaRequest.cpfAluno()).
+                orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado com cpf: " + matriculaRequest.cpfAluno()));
+
+        if (matriculaRepository.existsByAlunoIdAndStatus(aluno.getId(), StatusMatricula.ATIVA)) {
             throw new RegraDeNegocioException("Aluno já possui uma matrícula ativa");
         }
 
-        Aluno aluno = alunoRepository.findById(matriculaRequest.alunoId()).
-                orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado com id: " + matriculaRequest.alunoId()));
 
         Matricula matricula = new Matricula();
         matricula.setAluno(aluno);
