@@ -9,6 +9,8 @@ public interface PlanoRepository extends JpaRepository<Plano, Long> {
 
     boolean existsByModalidadeIdAndNome(Long modalidadeId, String nome);
 
+    boolean existyByModalidade(Long modalidadeId);
+
     Page<Plano> findByModalidadeId(Long modalidadeId, Pageable pageable);
 
     Page<Plano> findByAtivo(Boolean ativo, Pageable pageable);

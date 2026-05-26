@@ -5,7 +5,10 @@ import dev.backanderson.projetomastersys.dto.ModalidadeRequest;
 import dev.backanderson.projetomastersys.dto.ModalidadeResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
+import dev.backanderson.projetomastersys.repository.MatriculaModalidadeRepository;
+import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.repository.ModalidadeRepository;
+import dev.backanderson.projetomastersys.repository.PlanoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +21,13 @@ import java.util.List;
 public class ModalidadeService {
 
     private final ModalidadeRepository repository;
+    private final PlanoRepository planoRepository;
+    private final MatriculaModalidadeRepository matriculaModalidadeRepository;
 
 
     public ModalidadeResponse cadastrar(ModalidadeRequest request) {
         if (repository.existsByNome(request.nome())) {
-            throw new RuntimeException("Já existe uma modalidade com esse nome");
+            throw new RegraDeNegocioException("Já existe uma modalidade com esse nome");
         }
 
         Modalidade modalidade = new Modalidade();
@@ -56,7 +61,7 @@ public class ModalidadeService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));
 
         if (!modalidade.getNome().equals(request.nome()) && repository.existsByNome(request.nome())) {
-            throw new RuntimeException("Já existe uma modalidade com esse nome");
+            throw new RegraDeNegocioException("Já existe uma modalidade com esse nome");
         }
 
         request.preencher(modalidade);
@@ -91,6 +96,13 @@ public class ModalidadeService {
         Modalidade modalidade = repository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));
 
+        if (planoRepository.existyByModalidade(id)) {
+            throw new RegraDeNegocioException("Não é possível excluir uma modalidade que possui planos associados");
+        }
+
+        if (matriculaModalidadeRepository.existsByModalidadeId(id)) {
+            throw new RegraDeNegocioException("Não é possível excluir uma modalidade que possui matrículas associadas");
+        }
         repository.delete(modalidade);
 
     }

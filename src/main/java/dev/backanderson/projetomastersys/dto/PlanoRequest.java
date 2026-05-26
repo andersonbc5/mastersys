@@ -2,6 +2,7 @@ package dev.backanderson.projetomastersys.dto;
 
 import dev.backanderson.projetomastersys.domain.Plano;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ public record PlanoRequest(
         @NotNull(message = "modalidade é obrigatório")
         Long modalidadeId,
 
-        @NotNull(message = "nome é obrigatório")
+        @NotBlank(message = "nome do plano é obrigatório")
         String nome,
 
         @NotNull(message = "valor mensal é obrigatório")
