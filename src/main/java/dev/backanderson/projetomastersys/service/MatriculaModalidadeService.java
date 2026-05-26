@@ -41,7 +41,7 @@ public class MatriculaModalidadeService {
         Modalidade modalidade = modalidadeRepository.findById(request.modalidadeId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + request.modalidadeId()));
 
-        if (!modalidade.isAtiva()) {
+        if (!modalidade.getAtiva()) {
             throw new RegraDeNegocioException("Modalidade deve estar ativa para ser adicionada a matrícula");
         }
 
