@@ -61,7 +61,7 @@ public class MatriculaModalidadeService {
             throw new RegraDeNegocioException("Plano não pertence à modalidade informada");
         }
 
-        if (!plano.isAtivo()) {
+        if (!plano.getAtivo()) {
             throw new RegraDeNegocioException("Plano deve estar ativo para ser adicionado à matrícula");
         }
 
@@ -113,7 +113,7 @@ public class MatriculaModalidadeService {
 
         }
 
-        if (!plano.isAtivo()) {
+        if (!plano.getAtivo()) {
             throw new RegraDeNegocioException("Plano deve estar ativo para ser adicionado à matrícula");
 
         }

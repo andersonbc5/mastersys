@@ -29,6 +29,6 @@ public class Plano {
     private Modalidade modalidade;
 
     @Column(nullable = false)
-    private boolean ativo = true;
+    private Boolean ativo = true;
 
 }
