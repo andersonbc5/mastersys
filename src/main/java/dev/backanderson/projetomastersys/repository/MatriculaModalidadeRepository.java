@@ -11,6 +11,10 @@ public interface MatriculaModalidadeRepository extends JpaRepository<MatriculaMo
 
     boolean existsByModalidadeId(Long modalidadeId);
 
+    boolean existsByGraduacaoId(Long graduacaoId);
+
+    boolean existsByPlanoId(Long planoId);
+
     List<MatriculaModalidade> findByMatriculaId(Long matriculaId);
 
 

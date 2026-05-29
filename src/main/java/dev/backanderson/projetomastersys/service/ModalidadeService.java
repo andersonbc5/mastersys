@@ -6,15 +6,12 @@ import dev.backanderson.projetomastersys.dto.ModalidadeResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.MatriculaModalidadeRepository;
-import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.repository.ModalidadeRepository;
 import dev.backanderson.projetomastersys.repository.PlanoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -96,7 +93,7 @@ public class ModalidadeService {
         Modalidade modalidade = repository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));
 
-        if (planoRepository.existyByModalidade(id)) {
+        if (planoRepository.existsByModalidadeId(id)) {
             throw new RegraDeNegocioException("Não é possível excluir uma modalidade que possui planos associados");
         }
 

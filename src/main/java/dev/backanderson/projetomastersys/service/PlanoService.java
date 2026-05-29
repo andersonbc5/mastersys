@@ -6,6 +6,7 @@ import dev.backanderson.projetomastersys.dto.PlanoRequest;
 import dev.backanderson.projetomastersys.dto.PlanoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
+import dev.backanderson.projetomastersys.repository.MatriculaModalidadeRepository;
 import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.repository.ModalidadeRepository;
 import dev.backanderson.projetomastersys.repository.PlanoRepository;
@@ -21,7 +22,7 @@ public class PlanoService {
 
     private final PlanoRepository planoRepository;
     private final ModalidadeRepository modalidadeRepository;
-    private final MatriculaRepository matriculaRepository;
+    private final MatriculaModalidadeRepository matriculaModalidadeRepository;
 
     public PlanoResponse cadastrar(PlanoRequest planoRequest) {
         Modalidade modalidade = modalidadeRepository.findById(planoRequest.modalidadeId())
@@ -96,7 +97,7 @@ public class PlanoService {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
 
-        if (matriculaRepository.existsByPlanoId(plano.getId())) {
+        if (matriculaModalidadeRepository.existsByPlanoId(plano.getId())) {
             throw new RegraDeNegocioException("Não é possível excluir um plano que está associado a uma matrícula");
         }
         planoRepository.delete(plano);
