@@ -1,9 +1,11 @@
 package dev.backanderson.projetomastersys.controller;
 
 
+import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
 import dev.backanderson.projetomastersys.dto.MatriculaFiltroRequest;
 import dev.backanderson.projetomastersys.dto.MatriculaRequest;
 import dev.backanderson.projetomastersys.dto.MatriculaResponse;
+import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import dev.backanderson.projetomastersys.service.MatriculaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,12 +21,19 @@ import org.springframework.web.bind.annotation.*;
 public class MatriculaController {
 
     private final MatriculaService matriculaService;
+    private final FaturaMatriculaService faturaMatriculaService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MatriculaResponse cadastrar(@RequestBody @Valid MatriculaRequest matriculaRequest) {
         return matriculaService.cadastrar(matriculaRequest);
 
+    }
+
+    @PostMapping("/{id}/gerar-fatura")
+    @ResponseStatus(HttpStatus.CREATED)
+    public FaturaMatriculaResponse gerarFatura(@PathVariable Long id) {
+        return faturaMatriculaService.gerarFatura(id);
     }
 
     @GetMapping
