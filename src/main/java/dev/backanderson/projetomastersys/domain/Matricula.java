@@ -3,14 +3,13 @@ package dev.backanderson.projetomastersys.domain;
 
 import dev.backanderson.projetomastersys.domain.enums.StatusMatricula;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Map;
 
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

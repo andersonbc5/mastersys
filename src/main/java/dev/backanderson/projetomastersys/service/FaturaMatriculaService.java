@@ -131,6 +131,10 @@ public class FaturaMatriculaService {
     }
 
     public Page<FaturaMatriculaResponse> listarPorStatus(String status, Pageable pageable) {
+        if (status == null || status.isBlank()) {
+            return faturaMatriculaRepository.findAll(pageable)
+                    .map(this::toResponse);
+        }
         try {
             StatusFatura statusFatura = StatusFatura.valueOf(status.toUpperCase());
             return faturaMatriculaRepository.findByStatus(statusFatura, pageable)

@@ -7,6 +7,7 @@ import dev.backanderson.projetomastersys.dto.AlunoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;
+import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.specification.AlunoSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class AlunoService {
 
     private final AlunoRepository repository;
+    private final MatriculaRepository matriculaRepository;
 
     public AlunoResponse cadastrar(AlunoRequest alunoRequest) {
         if (alunoRequest.email() != null && repository.existsByEmail(alunoRequest.email())) {
@@ -52,6 +54,10 @@ public class AlunoService {
     public void excluir(Long id) {
         Aluno aluno = repository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não encontrado com id: " + id));
+
+        if (matriculaRepository.existsByAlunoId(id)) {
+            throw new RegraDeNegocioException("Não é possível excluir um aluno que possui matrículas ativas");
+        }
 
         repository.delete(aluno);
     }

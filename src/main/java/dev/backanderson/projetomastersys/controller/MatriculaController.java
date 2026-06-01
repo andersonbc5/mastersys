@@ -9,6 +9,7 @@ import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import dev.backanderson.projetomastersys.service.MatriculaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/matriculas")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MatriculaController {
 
     private final MatriculaService matriculaService;

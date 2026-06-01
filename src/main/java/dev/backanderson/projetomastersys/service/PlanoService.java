@@ -76,10 +76,11 @@ public class PlanoService {
     public PlanoResponse ativar(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
-        plano.setAtivo(true);
+
         if (!plano.getAtivo()) {
             throw new RegraDeNegocioException("Plano já está ativo");
         }
+        plano.setAtivo(true);
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
