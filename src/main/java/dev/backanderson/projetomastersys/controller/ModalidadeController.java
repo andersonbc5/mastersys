@@ -1,6 +1,7 @@
 package dev.backanderson.projetomastersys.controller;
 
 
+import dev.backanderson.projetomastersys.documentacao.ModalidadeControllerDoc;
 import dev.backanderson.projetomastersys.dto.ModalidadeRequest;
 import dev.backanderson.projetomastersys.dto.ModalidadeResponse;
 import dev.backanderson.projetomastersys.service.ModalidadeService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/modalidades")
 @RequiredArgsConstructor
-public class ModalidadeController {
+public class ModalidadeController implements ModalidadeControllerDoc {
 
     private final ModalidadeService service;
 
@@ -25,7 +26,9 @@ public class ModalidadeController {
     }
 
     @GetMapping
-    public Page<ModalidadeResponse> listar(@RequestParam(required = false) Boolean ativa, Pageable pageable) {
+    public Page<ModalidadeResponse> listar(
+            @RequestParam(required = false) Boolean ativa,
+            Pageable pageable) {
         return service.listarAtivas(ativa, pageable);
     }
 

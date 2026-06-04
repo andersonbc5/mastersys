@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class GraduacaoService {
     private final ModalidadeRepository modalidadeRepository;
     private final MatriculaModalidadeRepository matriculaModalidadeRepository;
 
+    @Transactional
     public GraduacaoResponse cadastrar(GraduacaoRequest request) {
         Modalidade modalidade = modalidadeRepository.findById(request.modalidadeId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada"));
@@ -39,6 +41,7 @@ public class GraduacaoService {
         return GraduacaoResponse.fromEntity(graduacaoRepository.save(graduacao));
     }
 
+    @Transactional(readOnly = true)
     public List<GraduacaoResponse> listarPorModalidade(Long modalidadeId) {
         if (!modalidadeRepository.existsById(modalidadeId)) {
             throw new RecursoNaoEncontradoException("Modalidade não encontrada");
@@ -48,15 +51,20 @@ public class GraduacaoService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public Page<GraduacaoResponse> listarTodas(Pageable pageable){
         return graduacaoRepository.findAll(pageable).map(GraduacaoResponse::fromEntity);
     }
 
+
+    @Transactional(readOnly = true)
     public GraduacaoResponse buscarPorId(Long id) {
         return graduacaoRepository.findById(id).map(GraduacaoResponse::fromEntity)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Graduação não encontrada"));
     }
 
+
+    @Transactional
     public GraduacaoResponse atualizar(Long id, GraduacaoRequest request) {
         Graduacao graduacao = graduacaoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Graduação não encontrada"));
@@ -74,6 +82,7 @@ public class GraduacaoService {
         return GraduacaoResponse.fromEntity(graduacaoRepository.save(graduacao));
     }
 
+    @Transactional
     public void excluir(Long id) {
         Graduacao graduacao = graduacaoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Graduação não encontrada com id: " + id));

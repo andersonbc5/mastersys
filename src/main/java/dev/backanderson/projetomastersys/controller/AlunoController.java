@@ -30,9 +30,7 @@ public class AlunoController implements AlunoControllerDoc {
     }
 
     @GetMapping
-    public Page<AlunoResponse> listar(
-            @ParameterObject AlunoFiltroRequest filtroRequest,
-            @PageableDefault(page = 0, size = 10, sort = "nome") Pageable pageable) {
+    public Page<AlunoResponse> listar(AlunoFiltroRequest filtroRequest, Pageable pageable) {
         return service.listar(filtroRequest, pageable);
     }
 

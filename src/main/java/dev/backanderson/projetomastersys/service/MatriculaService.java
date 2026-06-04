@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,7 @@ public class MatriculaService {
     private final MatriculaRepository matriculaRepository;
     private final AlunoRepository alunoRepository;
 
+    @Transactional
     public MatriculaResponse cadastrar(MatriculaRequest matriculaRequest) {
 
         Aluno aluno = alunoRepository.findByCpf(matriculaRequest.cpfAluno()).
@@ -44,18 +46,21 @@ public class MatriculaService {
 
     }
 
+    @Transactional(readOnly = true)
     public Page<MatriculaResponse> listar(MatriculaFiltroRequest filtroRequest, Pageable pageable) {
         return matriculaRepository.findAll(MatriculaSpecification.comFiltros(filtroRequest), pageable)
                 .map(MatriculaResponse::fromEntity);
     }
 
 
+    @Transactional(readOnly = true)
     public MatriculaResponse buscarPorId(Long id) {
         return matriculaRepository.findById(id)
                 .map(MatriculaResponse::fromEntity)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));
     }
 
+    @Transactional
     public MatriculaResponse encerrarMatricula(Long id) {
         Matricula matricula = matriculaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));
@@ -71,6 +76,7 @@ public class MatriculaService {
         return MatriculaResponse.fromEntity(matriculaRepository.save(matricula));
     }
 
+    @Transactional
     public MatriculaResponse cancelarMatricula(Long id) {
         Matricula matricula = matriculaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + id));

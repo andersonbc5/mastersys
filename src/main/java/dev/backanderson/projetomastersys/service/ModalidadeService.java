@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class ModalidadeService {
     private final MatriculaModalidadeRepository matriculaModalidadeRepository;
 
 
+    @Transactional
     public ModalidadeResponse cadastrar(ModalidadeRequest request) {
         if (repository.existsByNome(request.nome())) {
             throw new RegraDeNegocioException("Já existe uma modalidade com esse nome");
@@ -34,16 +36,19 @@ public class ModalidadeService {
         return ModalidadeResponse.fromEntity(repository.save(modalidade));
     }
 
+    @Transactional(readOnly = true)
     public ModalidadeResponse buscarPorId(Long id) {
         return repository.findById(id)
                 .map(ModalidadeResponse::fromEntity).orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada"));
     }
 
+    @Transactional(readOnly = true)
     public Page<ModalidadeResponse> listar(Pageable pageable) {
         return repository.findAll(pageable)
                 .map(ModalidadeResponse::fromEntity);
     }
 
+    @Transactional(readOnly = true)
     public Page<ModalidadeResponse> listarAtivas(Boolean ativa, Pageable pageable) {
         if (ativa != null) {
             return repository.findByAtiva(ativa, pageable)
@@ -53,6 +58,7 @@ public class ModalidadeService {
                 .map(ModalidadeResponse::fromEntity);
     }
 
+    @Transactional
     public ModalidadeResponse atualizar(Long id, ModalidadeRequest request) {
         Modalidade modalidade = repository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));
@@ -65,7 +71,7 @@ public class ModalidadeService {
         return ModalidadeResponse.fromEntity(repository.save(modalidade));
     }
 
-
+    @Transactional
     public ModalidadeResponse ativar(Long id) {
         Modalidade modalidade = repository.findById(id).
                 orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));
@@ -76,6 +82,7 @@ public class ModalidadeService {
         return ModalidadeResponse.fromEntity(repository.save(modalidade));
     }
 
+    @Transactional
     public ModalidadeResponse desativar(Long id) {
         Modalidade modalidade = repository.findById(id).
                 orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada"));
@@ -89,6 +96,7 @@ public class ModalidadeService {
         return ModalidadeResponse.fromEntity(repository.save(modalidade));
     }
 
+    @Transactional
     public void excluir(Long id) {
         Modalidade modalidade = repository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + id));

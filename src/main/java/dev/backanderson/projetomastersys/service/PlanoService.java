@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -24,6 +25,7 @@ public class PlanoService {
     private final ModalidadeRepository modalidadeRepository;
     private final MatriculaModalidadeRepository matriculaModalidadeRepository;
 
+    @Transactional
     public PlanoResponse cadastrar(PlanoRequest planoRequest) {
         Modalidade modalidade = modalidadeRepository.findById(planoRequest.modalidadeId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Modalidade não encontrada com id: " + planoRequest.modalidadeId()));
@@ -41,12 +43,14 @@ public class PlanoService {
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
+    @Transactional(readOnly = true)
     public PlanoResponse buscarPorId(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
         return PlanoResponse.fromEntity(plano);
     }
 
+    @Transactional(readOnly = true)
     public Page<PlanoResponse> listar(Long modalidadeId, Boolean ativo, Pageable pageable) {
         if (modalidadeId != null) {
             return planoRepository.findByModalidadeId(modalidadeId, pageable)
@@ -60,6 +64,7 @@ public class PlanoService {
                 .map(PlanoResponse::fromEntity);
     }
 
+    @Transactional
     public PlanoResponse atualizar(Long id, PlanoRequest request) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
@@ -73,6 +78,7 @@ public class PlanoService {
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
+    @Transactional
     public PlanoResponse ativar(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
@@ -84,6 +90,7 @@ public class PlanoService {
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
+    @Transactional
     public PlanoResponse desativar(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
@@ -94,6 +101,8 @@ public class PlanoService {
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
+
+    @Transactional
     public void excluir(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));

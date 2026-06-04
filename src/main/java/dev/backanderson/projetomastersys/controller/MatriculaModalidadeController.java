@@ -1,6 +1,7 @@
 package dev.backanderson.projetomastersys.controller;
 
 
+import dev.backanderson.projetomastersys.documentacao.MatriculaModalidadeControllerDoc;
 import dev.backanderson.projetomastersys.dto.MatriculaModalidadeRequest;
 import dev.backanderson.projetomastersys.dto.MatriculaModalidadeResponse;
 import dev.backanderson.projetomastersys.service.MatriculaModalidadeService;
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/matricula-modalidades")
 @RequiredArgsConstructor
-public class MatriculaModalidadeController {
+public class MatriculaModalidadeController implements MatriculaModalidadeControllerDoc {
 
     private final MatriculaModalidadeService matriculaModalidadeService;
 
@@ -42,7 +43,7 @@ public class MatriculaModalidadeController {
             @PathVariable Long id,
             @PathVariable Long graduacaoId
     ) {
-        return matriculaModalidadeService.atualizarGraducao(id, graduacaoId);
+        return matriculaModalidadeService.atualizarGraduacao(id, graduacaoId);
 
     }
 

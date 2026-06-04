@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class FaturaMatriculaService {
         return FaturaMatriculaResponse.fromEntity(fatura, modalidades);
     }
 
+    @Transactional
     public FaturaMatriculaResponse gerarFatura(Long matriculaId) {
         Matricula matricula = matriculaRepository.findById(matriculaId)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada"));
@@ -87,6 +89,7 @@ public class FaturaMatriculaService {
         return toResponse(faturaMatriculaRepository.save(fatura));
     }
 
+    @Transactional
     public FaturaMatriculaResponse registrarPagamento(Long id) {
         FaturaMatricula fatura = buscarEntidade(id);
 
@@ -101,6 +104,7 @@ public class FaturaMatriculaService {
         return toResponse(faturaMatriculaRepository.save(fatura));
     }
 
+    @Transactional
     public FaturaMatriculaResponse cancelar(Long id) {
         FaturaMatricula fatura = buscarEntidade(id);
 
@@ -118,10 +122,14 @@ public class FaturaMatriculaService {
         return toResponse(faturaMatriculaRepository.save(fatura));
     }
 
+
+    @Transactional(readOnly = true)
     public FaturaMatriculaResponse buscarPorId(Long id) {
         return toResponse(buscarEntidade(id));
     }
 
+
+    @Transactional(readOnly = true)
     public Page<FaturaMatriculaResponse> listarPorMatricula(Long matriculaId, Pageable pageable) {
         if (!matriculaRepository.existsById(matriculaId)) {
             throw new RecursoNaoEncontradoException("Matrícula não encontrada");
@@ -130,6 +138,7 @@ public class FaturaMatriculaService {
                 .map(this::toResponse);
     }
 
+    @Transactional(readOnly = true)
     public Page<FaturaMatriculaResponse> listarPorStatus(String status, Pageable pageable) {
         if (status == null || status.isBlank()) {
             return faturaMatriculaRepository.findAll(pageable)
@@ -143,6 +152,7 @@ public class FaturaMatriculaService {
             throw new RegraDeNegocioException("Status inválido: " + status);
         }
     }
+
 
     private FaturaMatricula buscarEntidade(Long id) {
         return faturaMatriculaRepository.findById(id)

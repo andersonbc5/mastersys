@@ -66,4 +66,29 @@ class MatriculaServiceTest {
 
 
     }
+
+    @Test
+    void buscarPorId() {
+        Long id = 1L;
+        Matricula matricula = new Matricula();
+        matricula.setId(id);
+
+        Aluno aluno = new Aluno();
+        aluno.setId(1L);
+        aluno.setCpf("47233289808");
+        matricula.setAluno(aluno);
+        matricula.setDiaVencimento(10);
+
+        when(repository.findById(id))
+                .thenReturn(Optional.of(matricula));
+
+        var resultado = service.buscarPorId(id);
+
+        assertNotNull(resultado);
+        assertEquals(id, resultado.id());
+
+        verify(repository, times(1))
+                .findById(id);
+
+    }
 }

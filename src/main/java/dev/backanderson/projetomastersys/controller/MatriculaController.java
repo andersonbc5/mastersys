@@ -1,6 +1,7 @@
 package dev.backanderson.projetomastersys.controller;
 
 
+import dev.backanderson.projetomastersys.documentacao.MatriculaControllerDoc;
 import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
 import dev.backanderson.projetomastersys.dto.MatriculaFiltroRequest;
 import dev.backanderson.projetomastersys.dto.MatriculaRequest;
@@ -8,18 +9,18 @@ import dev.backanderson.projetomastersys.dto.MatriculaResponse;
 import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import dev.backanderson.projetomastersys.service.MatriculaService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/matriculas")
 @RequiredArgsConstructor
-public class MatriculaController {
+public class MatriculaController implements MatriculaControllerDoc {
 
     private final MatriculaService matriculaService;
     private final FaturaMatriculaService faturaMatriculaService;

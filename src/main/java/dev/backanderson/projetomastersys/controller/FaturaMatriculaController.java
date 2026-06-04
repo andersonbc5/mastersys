@@ -1,5 +1,6 @@
 package dev.backanderson.projetomastersys.controller;
 
+import dev.backanderson.projetomastersys.documentacao.FaturaMatriculaControllerDoc;
 import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
 import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/faturas")
 @RequiredArgsConstructor
-public class FaturaMatriculaController {
+public class FaturaMatriculaController implements FaturaMatriculaControllerDoc {
 
     private final FaturaMatriculaService service;
 

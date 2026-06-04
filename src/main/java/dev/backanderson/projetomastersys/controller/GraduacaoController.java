@@ -1,5 +1,6 @@
 package dev.backanderson.projetomastersys.controller;
 
+import dev.backanderson.projetomastersys.documentacao.GraduacaoControllerDoc;
 import dev.backanderson.projetomastersys.dto.GraduacaoRequest;
 import dev.backanderson.projetomastersys.dto.GraduacaoResponse;
 import dev.backanderson.projetomastersys.service.GraduacaoService;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/graduacoes")
 @RequiredArgsConstructor
-public class GraduacaoController {
+public class GraduacaoController implements GraduacaoControllerDoc {
 
     private final GraduacaoService graduacaoService;
 

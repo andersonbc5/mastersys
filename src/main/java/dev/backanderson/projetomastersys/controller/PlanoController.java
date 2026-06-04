@@ -1,6 +1,7 @@
 package dev.backanderson.projetomastersys.controller;
 
 
+import dev.backanderson.projetomastersys.documentacao.PlanoControllerDoc;
 import dev.backanderson.projetomastersys.dto.PlanoRequest;
 import dev.backanderson.projetomastersys.dto.PlanoResponse;
 import dev.backanderson.projetomastersys.service.PlanoService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/planos")
 @RequiredArgsConstructor
-public class PlanoController {
+public class PlanoController implements PlanoControllerDoc {
 
     private final PlanoService planoService;
 

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MatriculaModalidadeService {
     private final GraduacaoRepository graduacaoRepository;
     private final PlanoRepository planoRepository;
 
-
+    @Transactional
     public MatriculaModalidadeResponse adicionar(MatriculaModalidadeRequest request) {
         Matricula matricula = matriculaRepository.findById(request.matriculaId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + request.matriculaId()));
@@ -74,6 +75,7 @@ public class MatriculaModalidadeService {
         return MatriculaModalidadeResponse.fromEntity(matriculaModalidadeRepository.save(matriculaModalidade));
     }
 
+    @Transactional(readOnly = true)
     public List<MatriculaModalidadeResponse> listarPorMatricula(Long matriculaId) {
         if (!matriculaRepository.existsById(matriculaId)) {
             throw new RecursoNaoEncontradoException("Matrícula não encontrada com id: " + matriculaId);
@@ -84,7 +86,8 @@ public class MatriculaModalidadeService {
                 .toList();
     }
 
-    public MatriculaModalidadeResponse atualizarGraducao(Long id, Long graduacaoId) {
+    @Transactional
+    public MatriculaModalidadeResponse atualizarGraduacao(Long id, Long graduacaoId) {
         MatriculaModalidade matriculaModalidade = matriculaModalidadeRepository.findById(id).
                 orElseThrow(() -> new RecursoNaoEncontradoException("MatriculaModalidade não encontrada com id: " + id));
 
@@ -101,6 +104,7 @@ public class MatriculaModalidadeService {
 
     }
 
+    @Transactional
     public MatriculaModalidadeResponse atualizarPlano(Long id, long planoId) {
         MatriculaModalidade matriculaModalidade = matriculaModalidadeRepository.findById(id).
                 orElseThrow(() -> new RecursoNaoEncontradoException("MatriculaModalidade não encontrada com id: " + id));
@@ -122,6 +126,7 @@ public class MatriculaModalidadeService {
         return MatriculaModalidadeResponse.fromEntity(matriculaModalidadeRepository.save(matriculaModalidade));
     }
 
+    @Transactional
     public void excluir(Long id) {
         MatriculaModalidade matriculaModalidade = matriculaModalidadeRepository.findById(id).
                 orElseThrow(() -> new RecursoNaoEncontradoException("MatriculaModalidade não encontrada com id: " + id));
@@ -133,6 +138,7 @@ public class MatriculaModalidadeService {
         matriculaModalidadeRepository.delete(matriculaModalidade);
     }
 
+    @Transactional(readOnly = true)
     public Page<MatriculaModalidadeResponse> listar(Pageable pageable) {
         return matriculaModalidadeRepository.findAll(pageable)
                 .map(MatriculaModalidadeResponse::fromEntity);

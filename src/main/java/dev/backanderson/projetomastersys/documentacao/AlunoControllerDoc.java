@@ -40,7 +40,6 @@ public interface AlunoControllerDoc {
             }
     )
     AlunoResponse cadastrar(
-            @RequestBody
             @Valid
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Dados do aluno a ser cadastrado",
@@ -99,7 +98,9 @@ public interface AlunoControllerDoc {
             summary = "Buscar aluno por ID",
             description = "Permite buscar um aluno específico pelo seu ID",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Aluno encontrado e retornado com sucesso"),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Aluno encontrado e retornado com sucesso"),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Aluno não encontrado com o ID fornecido",
@@ -107,7 +108,9 @@ public interface AlunoControllerDoc {
             }
     )
     AlunoResponse buscarPorId(
-            @Parameter(description = "ID do aluno a ser buscado", example = "1", required = true) Long id);
+            @Parameter(
+                    description = "ID do aluno a ser buscado", example = "1", required = true)
+            Long id);
 
 
     @Operation(

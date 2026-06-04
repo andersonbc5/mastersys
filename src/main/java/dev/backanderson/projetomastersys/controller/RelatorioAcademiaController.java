@@ -1,5 +1,6 @@
 package dev.backanderson.projetomastersys.controller;
 
+import dev.backanderson.projetomastersys.documentacao.RelatorioAcademiaControllerDoc;
 import dev.backanderson.projetomastersys.projection.AlunosPorCidadeProjection;
 import dev.backanderson.projetomastersys.projection.FaturamentoMensalProjection;
 import dev.backanderson.projetomastersys.projection.FaturasEmAbertoProjection;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/relatorios")
 @AllArgsConstructor
-public class RelatorioAcademinaController {
+public class RelatorioAcademiaController implements RelatorioAcademiaControllerDoc {
 
     private final RelatorioAcademiaRepository relatorioAcademiaRepository;
 

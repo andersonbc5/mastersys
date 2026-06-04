@@ -61,4 +61,27 @@ class AlunoServiceTest {
 
 
     }
+
+    @Test
+    void listarPorId() {
+        Long id = 1L;
+        Aluno aluno = new Aluno();
+        aluno.setId(id);
+        aluno.setNome("Anderson");
+
+        when(alunoRepository.findById(id))
+                .thenReturn(java.util.Optional.of(aluno));
+
+        var resultado = alunoService.buscarPorId(id);
+
+        assertNotNull(resultado);
+        assertEquals("Anderson", resultado.nome());
+
+        verify(alunoRepository, times(1))
+                .findById(id);
+
+    }
+
+
+
 }
