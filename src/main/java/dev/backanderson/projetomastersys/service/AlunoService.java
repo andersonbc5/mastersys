@@ -1,9 +1,9 @@
 package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
-import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
-import dev.backanderson.projetomastersys.dto.AlunoRequest;
-import dev.backanderson.projetomastersys.dto.AlunoResponse;
+import dev.backanderson.projetomastersys.dto.request.AlunoFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.AlunoRequest;
+import dev.backanderson.projetomastersys.dto.response.AlunoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;

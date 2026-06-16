@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.documentacao;
 
-import dev.backanderson.projetomastersys.dto.GraduacaoRequest;
-import dev.backanderson.projetomastersys.dto.GraduacaoResponse;
+import dev.backanderson.projetomastersys.dto.request.GraduacaoRequest;
+import dev.backanderson.projetomastersys.dto.response.GraduacaoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

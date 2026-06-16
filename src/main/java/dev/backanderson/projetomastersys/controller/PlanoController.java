@@ -2,8 +2,8 @@ package dev.backanderson.projetomastersys.controller;
 
 
 import dev.backanderson.projetomastersys.documentacao.PlanoControllerDoc;
-import dev.backanderson.projetomastersys.dto.PlanoRequest;
-import dev.backanderson.projetomastersys.dto.PlanoResponse;
+import dev.backanderson.projetomastersys.dto.request.PlanoRequest;
+import dev.backanderson.projetomastersys.dto.response.PlanoResponse;
 import dev.backanderson.projetomastersys.service.PlanoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -3,8 +3,8 @@ package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Graduacao;
 import dev.backanderson.projetomastersys.domain.Modalidade;
-import dev.backanderson.projetomastersys.dto.GraduacaoRequest;
-import dev.backanderson.projetomastersys.dto.GraduacaoResponse;
+import dev.backanderson.projetomastersys.dto.request.GraduacaoRequest;
+import dev.backanderson.projetomastersys.dto.response.GraduacaoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.GraduacaoRepository;

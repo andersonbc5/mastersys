@@ -1,4 +1,4 @@
-package dev.backanderson.projetomastersys.dto;
+package dev.backanderson.projetomastersys.dto.response;
 
 import dev.backanderson.projetomastersys.domain.Plano;
 

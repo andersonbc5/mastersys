@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.documentacao;
 
-import dev.backanderson.projetomastersys.dto.PlanoRequest;
-import dev.backanderson.projetomastersys.dto.PlanoResponse;
+import dev.backanderson.projetomastersys.dto.request.PlanoRequest;
+import dev.backanderson.projetomastersys.dto.response.PlanoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

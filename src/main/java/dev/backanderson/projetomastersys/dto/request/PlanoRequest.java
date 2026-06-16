@@ -1,4 +1,4 @@
-package dev.backanderson.projetomastersys.dto;
+package dev.backanderson.projetomastersys.dto.request;
 
 import dev.backanderson.projetomastersys.domain.Plano;
 import jakarta.validation.constraints.DecimalMin;

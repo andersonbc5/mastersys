@@ -1,6 +1,6 @@
 package dev.backanderson.projetomastersys.documentacao;
 
-import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
+import dev.backanderson.projetomastersys.dto.response.FaturaMatriculaResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

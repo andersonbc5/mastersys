@@ -1,4 +1,4 @@
-package dev.backanderson.projetomastersys.dto;
+package dev.backanderson.projetomastersys.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 

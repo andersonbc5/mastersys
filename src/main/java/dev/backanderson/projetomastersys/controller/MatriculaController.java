@@ -2,10 +2,10 @@ package dev.backanderson.projetomastersys.controller;
 
 
 import dev.backanderson.projetomastersys.documentacao.MatriculaControllerDoc;
-import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
-import dev.backanderson.projetomastersys.dto.MatriculaFiltroRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaResponse;
+import dev.backanderson.projetomastersys.dto.response.FaturaMatriculaResponse;
+import dev.backanderson.projetomastersys.dto.request.MatriculaFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.MatriculaRequest;
+import dev.backanderson.projetomastersys.dto.response.MatriculaResponse;
 import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import dev.backanderson.projetomastersys.service.MatriculaService;
 import jakarta.validation.Valid;

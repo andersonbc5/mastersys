@@ -1,4 +1,4 @@
-package dev.backanderson.projetomastersys.dto;
+package dev.backanderson.projetomastersys.dto.request;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
 import jakarta.validation.constraints.Email;

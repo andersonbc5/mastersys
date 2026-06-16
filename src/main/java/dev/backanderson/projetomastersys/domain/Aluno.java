@@ -2,10 +2,9 @@ package dev.backanderson.projetomastersys.domain;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "alunos")
+@EntityListeners(AuditingEntityListener.class)
 
 public class Aluno {
 
@@ -61,22 +61,14 @@ public class Aluno {
 
     private String cep;
 
+    @CreatedDate
     @Column(name = "criado_em")
     private LocalDateTime criadoEm;
 
+    @LastModifiedDate
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    @PrePersist
-    public void prePersist() {
-        criadoEm = LocalDateTime.now();
-        atualizadoEm = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        atualizadoEm = LocalDateTime.now();
-    }
 
 
 }

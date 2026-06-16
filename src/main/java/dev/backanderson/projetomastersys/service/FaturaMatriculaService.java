@@ -5,7 +5,7 @@ import dev.backanderson.projetomastersys.domain.Matricula;
 import dev.backanderson.projetomastersys.domain.MatriculaModalidade;
 import dev.backanderson.projetomastersys.domain.enums.StatusFatura;
 import dev.backanderson.projetomastersys.domain.enums.StatusMatricula;
-import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
+import dev.backanderson.projetomastersys.dto.response.FaturaMatriculaResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.FaturaMatriculaRepository;

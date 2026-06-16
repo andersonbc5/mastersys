@@ -1,16 +1,14 @@
 package dev.backanderson.projetomastersys.controller;
 
 import dev.backanderson.projetomastersys.documentacao.AlunoControllerDoc;
-import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
-import dev.backanderson.projetomastersys.dto.AlunoRequest;
-import dev.backanderson.projetomastersys.dto.AlunoResponse;
+import dev.backanderson.projetomastersys.dto.request.AlunoFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.AlunoRequest;
+import dev.backanderson.projetomastersys.dto.response.AlunoResponse;
 import dev.backanderson.projetomastersys.service.AlunoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

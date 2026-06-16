@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.controller;
 
 import dev.backanderson.projetomastersys.documentacao.FaturaMatriculaControllerDoc;
-import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
+import dev.backanderson.projetomastersys.dto.response.FaturaMatriculaResponse;
 import dev.backanderson.projetomastersys.service.FaturaMatriculaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

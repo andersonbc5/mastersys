@@ -2,8 +2,8 @@ package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.*;
 import dev.backanderson.projetomastersys.domain.enums.StatusMatricula;
-import dev.backanderson.projetomastersys.dto.MatriculaModalidadeRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaModalidadeResponse;
+import dev.backanderson.projetomastersys.dto.request.MatriculaModalidadeRequest;
+import dev.backanderson.projetomastersys.dto.response.MatriculaModalidadeResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.*;

@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.documentacao;
 
-import dev.backanderson.projetomastersys.dto.ModalidadeRequest;
-import dev.backanderson.projetomastersys.dto.ModalidadeResponse;
+import dev.backanderson.projetomastersys.dto.request.ModalidadeRequest;
+import dev.backanderson.projetomastersys.dto.response.ModalidadeResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.specification;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
-import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.AlunoFiltroRequest;
 import org.springframework.data.jpa.domain.Specification;
 
 public class AlunoSpecification {

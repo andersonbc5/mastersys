@@ -1,9 +1,9 @@
 package dev.backanderson.projetomastersys.documentacao;
 
 
-import dev.backanderson.projetomastersys.dto.AlunoFiltroRequest;
-import dev.backanderson.projetomastersys.dto.AlunoRequest;
-import dev.backanderson.projetomastersys.dto.AlunoResponse;
+import dev.backanderson.projetomastersys.dto.request.AlunoFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.AlunoRequest;
+import dev.backanderson.projetomastersys.dto.response.AlunoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

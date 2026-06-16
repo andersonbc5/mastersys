@@ -2,12 +2,11 @@ package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Modalidade;
 import dev.backanderson.projetomastersys.domain.Plano;
-import dev.backanderson.projetomastersys.dto.PlanoRequest;
-import dev.backanderson.projetomastersys.dto.PlanoResponse;
+import dev.backanderson.projetomastersys.dto.request.PlanoRequest;
+import dev.backanderson.projetomastersys.dto.response.PlanoResponse;
 import dev.backanderson.projetomastersys.exception.RecursoNaoEncontradoException;
 import dev.backanderson.projetomastersys.exception.RegraDeNegocioException;
 import dev.backanderson.projetomastersys.repository.MatriculaModalidadeRepository;
-import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import dev.backanderson.projetomastersys.repository.ModalidadeRepository;
 import dev.backanderson.projetomastersys.repository.PlanoRepository;
 import lombok.RequiredArgsConstructor;

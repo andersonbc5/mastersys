@@ -2,7 +2,7 @@ package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
 import dev.backanderson.projetomastersys.domain.Matricula;
-import dev.backanderson.projetomastersys.dto.MatriculaRequest;
+import dev.backanderson.projetomastersys.dto.request.MatriculaRequest;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;
 import dev.backanderson.projetomastersys.repository.MatriculaRepository;
 import org.junit.jupiter.api.Test;

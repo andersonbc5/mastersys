@@ -1,8 +1,8 @@
 package dev.backanderson.projetomastersys.controller;
 
 import dev.backanderson.projetomastersys.documentacao.GraduacaoControllerDoc;
-import dev.backanderson.projetomastersys.dto.GraduacaoRequest;
-import dev.backanderson.projetomastersys.dto.GraduacaoResponse;
+import dev.backanderson.projetomastersys.dto.request.GraduacaoRequest;
+import dev.backanderson.projetomastersys.dto.response.GraduacaoResponse;
 import dev.backanderson.projetomastersys.service.GraduacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

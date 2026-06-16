@@ -28,10 +28,10 @@ public class FaturaMatricula {
     private BigDecimal valor;
 
     @Column(name = "data_pagamento")
-    private java.time.LocalDateTime dataPagamento;
+    private LocalDateTime dataPagamento;
 
     @Column(name = "data_cancelamento")
-    private java.time.LocalDate dataCancelamento;
+    private LocalDate dataCancelamento;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

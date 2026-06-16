@@ -1,10 +1,10 @@
 package dev.backanderson.projetomastersys.documentacao;
 
 
-import dev.backanderson.projetomastersys.dto.FaturaMatriculaResponse;
-import dev.backanderson.projetomastersys.dto.MatriculaFiltroRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaResponse;
+import dev.backanderson.projetomastersys.dto.response.FaturaMatriculaResponse;
+import dev.backanderson.projetomastersys.dto.request.MatriculaFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.MatriculaRequest;
+import dev.backanderson.projetomastersys.dto.response.MatriculaResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

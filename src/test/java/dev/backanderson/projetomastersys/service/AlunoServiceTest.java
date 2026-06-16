@@ -1,7 +1,7 @@
 package dev.backanderson.projetomastersys.service;
 
 import dev.backanderson.projetomastersys.domain.Aluno;
-import dev.backanderson.projetomastersys.dto.AlunoRequest;
+import dev.backanderson.projetomastersys.dto.request.AlunoRequest;
 import dev.backanderson.projetomastersys.repository.AlunoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

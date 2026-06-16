@@ -2,8 +2,8 @@ package dev.backanderson.projetomastersys.controller;
 
 
 import dev.backanderson.projetomastersys.documentacao.MatriculaModalidadeControllerDoc;
-import dev.backanderson.projetomastersys.dto.MatriculaModalidadeRequest;
-import dev.backanderson.projetomastersys.dto.MatriculaModalidadeResponse;
+import dev.backanderson.projetomastersys.dto.request.MatriculaModalidadeRequest;
+import dev.backanderson.projetomastersys.dto.response.MatriculaModalidadeResponse;
 import dev.backanderson.projetomastersys.service.MatriculaModalidadeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -3,6 +3,7 @@ package dev.backanderson.projetomastersys.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ public class MatriculaModalidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CreatedDate
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
@@ -41,11 +43,6 @@ public class MatriculaModalidade {
     private Plano plano;
 
 
-    @PrePersist
-    public void prePersist() {
-        if (dataInicio == null) {
-            dataInicio = LocalDate.now();
-        }
-    }
+
 
 }

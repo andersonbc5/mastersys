@@ -2,7 +2,7 @@ package dev.backanderson.projetomastersys.specification;
 
 import dev.backanderson.projetomastersys.domain.Matricula;
 import dev.backanderson.projetomastersys.domain.enums.StatusMatricula;
-import dev.backanderson.projetomastersys.dto.MatriculaFiltroRequest;
+import dev.backanderson.projetomastersys.dto.request.MatriculaFiltroRequest;
 import org.springframework.data.jpa.domain.Specification;
 
 public class MatriculaSpecification {
