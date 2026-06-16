@@ -82,7 +82,7 @@ public class PlanoService {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
 
-        if (!plano.getAtivo()) {
+        if (plano.getAtivo()) {
             throw new RegraDeNegocioException("Plano já está ativo");
         }
         plano.setAtivo(true);
@@ -93,10 +93,11 @@ public class PlanoService {
     public PlanoResponse desativar(Long id) {
         Plano plano = planoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Plano não encontrado com id: " + id));
-        plano.setAtivo(false);
-        if (plano.getAtivo()) {
+
+        if (!plano.getAtivo()) {
             throw new RegraDeNegocioException("Plano já está desativado");
         }
+        plano.setAtivo(false);
         return PlanoResponse.fromEntity(planoRepository.save(plano));
     }
 
