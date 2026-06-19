@@ -6,14 +6,16 @@ API REST para gerenciamento de alunos, matrículas, modalidades, planos e financ
 
 ## 🛠 Tecnologias
 
-- Java 25
-- Spring Boot 3.5
+- Java 21
+- Spring Boot 
 - Spring Data JPA
 - Spring Validation
 - PostgreSQL
 - Flyway
 - Lombok
 - Springdoc OpenAPI (Swagger)
+- Spring Security
+- JWT
 
 ---
 
@@ -21,7 +23,7 @@ API REST para gerenciamento de alunos, matrículas, modalidades, planos e financ
 
 ### Pré-requisitos
 
-- Java 25
+- Java 21
 - PostgreSQL rodando localmente
 - Maven
 
@@ -41,8 +43,10 @@ Configure as variáveis de ambiente:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/academia
-spring.datasource.username=postgres
-spring.datasource.password=senha
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+
+jwt.secret=sua_chave_secreta
 ```
 
 ### Rodando
@@ -51,80 +55,189 @@ spring.datasource.password=senha
 ./mvnw spring-boot:run
 ```
 
-A API estará disponível em `http://localhost:8080`
+### Documentação
 
-A documentação Swagger estará em `http://localhost:8080/swagger-ui.html`
+Após iniciar a aplicação, a documentação Swagger estará em `http://localhost:8080/swagger-ui.html`
 
 ---
 
-## 📡 Endpoints
+### Autenticação
 
-### Alunos `/alunos`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+A API utiliza autenticação baseada em **JWT (JSON Web Token)**.
+
+### Login
+
+Realize a autenticação através do endpoint:
+
+```http
+POST /auth/login
+```
+
+Exemplo de requisição:
+
+```json
+{
+  "email": "admin@email.com",
+  "senha": "123456"
+}
+```
+
+Resposta:
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9..."
+}
+```
+
+### Utilizando o Token
+
+Após obter o token, envie-o no header `Authorization` das requisições protegidas:
+
+```http
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
+```
+
+### Perfis de Acesso
+
+A aplicação possui controle de acesso baseado em perfis:
+
+#### ADMIN
+
+Permissões administrativas:
+
+- Gerenciar usuários
+- Cadastrar, atualizar e excluir planos
+- Cadastrar, atualizar e excluir modalidades
+- Ativar e desativar registros
+- Acessar relatórios gerenciais
+
+#### USER
+
+Permissões de consulta:
+
+- Consultar alunos
+- Consultar matrículas
+- Consultar modalidades
+- Consultar planos
+
+### Códigos de Retorno de Segurança
+
+| Código | Descrição |
+|----------|------------|
+| 401 | Token ausente, inválido ou expirado |
+| 403 | Usuário autenticado sem permissão para acessar o recurso |
+
+---
+
+### Endpoints
+
+##  Alunos
+
+Gerenciamento completo de alunos da academia.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/alunos` | Cadastrar aluno |
 | GET | `/alunos` | Listar alunos (com filtros e paginação) |
-| GET | `/alunos/{id}` | Buscar por ID |
+| GET | `/alunos/{id}` | Buscar aluno por ID |
 | PUT | `/alunos/{id}` | Atualizar aluno |
 | DELETE | `/alunos/{id}` | Excluir aluno |
 
-### Matrículas `/matriculas`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+---
+
+##  Matrículas
+
+Controle de matrículas dos alunos.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/matriculas` | Cadastrar matrícula |
-| GET | `/matriculas` | Listar (com filtros e paginação) |
-| GET | `/matriculas/{id}` | Buscar por ID |
+| GET | `/matriculas` | Listar matrículas |
+| GET | `/matriculas/{id}` | Buscar matrícula por ID |
 | PATCH | `/matriculas/{id}/encerrar` | Encerrar matrícula |
 | PATCH | `/matriculas/{id}/cancelar` | Cancelar matrícula |
 
+---
 
-### Modalidades `/modalidades`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+##  Modalidades
+
+Gerenciamento das modalidades oferecidas pela academia.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/modalidades` | Cadastrar modalidade |
-| GET | `/modalidades` | Listar (filtro por ativa) |
-| GET | `/modalidades/{id}` | Buscar por ID |
-| PUT | `/modalidades/{id}` | Atualizar |
-| PATCH | `/modalidades/{id}/ativar` | Ativar |
-| PATCH | `/modalidades/{id}/desativar` | Desativar |
-| DELETE | `/modalidades/{id}` | Excluir |
+| GET | `/modalidades` | Listar modalidades |
+| GET | `/modalidades/{id}` | Buscar modalidade por ID |
+| PUT | `/modalidades/{id}` | Atualizar modalidade |
+| PATCH | `/modalidades/{id}/ativar` | Ativar modalidade |
+| PATCH | `/modalidades/{id}/desativar` | Desativar modalidade |
+| DELETE | `/modalidades/{id}` | Excluir modalidade |
 
-### Planos `/planos`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+---
+
+##  Planos
+
+Gerenciamento dos planos vinculados às modalidades.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/planos` | Cadastrar plano |
-| GET | `/planos` | Listar (filtro por modalidade/ativo) |
-| GET | `/planos/{id}` | Buscar por ID |
-| PUT | `/planos/{id}` | Atualizar |
-| PATCH | `/planos/{id}/ativar` | Ativar |
-| PATCH | `/planos/{id}/desativar` | Desativar |
-| DELETE | `/planos/{id}` | Excluir |
+| GET | `/planos` | Listar planos |
+| GET | `/planos/{id}` | Buscar plano por ID |
+| PUT | `/planos/{id}` | Atualizar plano |
+| PATCH | `/planos/{id}/ativar` | Ativar plano |
+| PATCH | `/planos/{id}/desativar` | Desativar plano |
+| DELETE | `/planos/{id}` | Excluir plano |
 
-### Graduações `/graduacoes`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+---
+
+##  Graduações
+
+Controle das graduações por modalidade.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/graduacoes` | Cadastrar graduação |
-| GET | `/graduacoes` | Listar todas |
-| GET | `/graduacoes/{id}` | Buscar por ID |
-| GET | `/graduacoes/modalidade/{id}` | Listar por modalidade |
-| PUT | `/graduacoes/{id}` | Atualizar |
-| DELETE | `/graduacoes/{id}` | Excluir |
+| GET | `/graduacoes` | Listar graduações |
+| GET | `/graduacoes/{id}` | Buscar graduação por ID |
+| GET | `/graduacoes/modalidade/{id}` | Listar graduações por modalidade |
+| PUT | `/graduacoes/{id}` | Atualizar graduação |
+| DELETE | `/graduacoes/{id}` | Excluir graduação |
 
-### Faturas `/faturas`
-| Método | Rota | Descrição |
-|--------|------|-----------|
+---
+
+##  Financeiro
+
+Controle de faturas e pagamentos.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
 | POST | `/faturas/matriculas/{id}/gerar` | Gerar fatura |
-| GET | `/faturas` | Listar (filtro por status) |
-| GET | `/faturas/{id}` | Buscar por ID |
-| GET | `/faturas/matricula/{id}` | Listar por matrícula |
+| GET | `/faturas` | Listar faturas |
+| GET | `/faturas/{id}` | Buscar fatura por ID |
+| GET | `/faturas/matricula/{id}` | Buscar faturas da matrícula |
 | PATCH | `/faturas/{id}/pagar` | Registrar pagamento |
 | PATCH | `/faturas/{id}/cancelar` | Cancelar fatura |
 
-### Relatórios `/relatorios`
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/relatorios/faturamento-mensal` | Faturamento por mês |
-| GET | `/relatorios/faturas-em-aberto` | Faturas em aberto |
-| GET | `/relatorios/alunos-por-cidade` | Alunos agrupados por cidade |
+---
+
+##  Relatórios (ADMIN)
+
+Endpoints exclusivos para usuários com perfil ADMIN.
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
+| GET | `/relatorios/faturamento-mensal` | Faturamento mensal |
+| GET | `/relatorios/faturas-em-aberto` | Faturas pendentes |
+| GET | `/relatorios/alunos-por-cidade` | Quantidade de alunos por cidade |
 
 ---
+
+##  Usuários e Autenticação
+
+| Método | Endpoint | Descrição |
+|----------|----------|----------|
+| POST | `/auth/login` | Realizar login |
+| POST | `/auth/registrar` | Cadastrar usuário (ADMIN) |
+
