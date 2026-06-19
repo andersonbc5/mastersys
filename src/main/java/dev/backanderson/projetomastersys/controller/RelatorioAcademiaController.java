@@ -6,6 +6,7 @@ import dev.backanderson.projetomastersys.projection.FaturamentoMensalProjection;
 import dev.backanderson.projetomastersys.projection.FaturasEmAbertoProjection;
 import dev.backanderson.projetomastersys.repository.RelatorioAcademiaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/relatorios")
 @AllArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class RelatorioAcademiaController implements RelatorioAcademiaControllerDoc {
 
     private final RelatorioAcademiaRepository relatorioAcademiaRepository;

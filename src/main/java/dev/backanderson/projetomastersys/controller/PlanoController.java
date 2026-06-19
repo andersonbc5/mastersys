@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,17 +22,20 @@ public class PlanoController implements PlanoControllerDoc {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public PlanoResponse cadastrar(@RequestBody @Valid PlanoRequest request) {
         return planoService.cadastrar(request);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public PlanoResponse buscarPorId(@PathVariable("id") Long id) {
         return planoService.buscarPorId(id);
 
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Page<PlanoResponse> listar(
             @RequestParam(required = false) Long modalidadeId,
             @RequestParam(required = false) Boolean ativo,
@@ -41,22 +45,26 @@ public class PlanoController implements PlanoControllerDoc {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public PlanoResponse atualizar(@PathVariable Long id, @RequestBody @Valid PlanoRequest request) {
         return planoService.atualizar(id, request);
     }
 
     @PatchMapping("/{id}/ativar")
+    @PreAuthorize("hasRole('ADMIN')")
     public PlanoResponse ativar(@PathVariable Long id) {
         return planoService.ativar(id);
     }
 
     @PatchMapping("/{id}/desativar")
+    @PreAuthorize("hasRole('ADMIN')")
     public PlanoResponse desativar(@PathVariable Long id) {
         return planoService.desativar(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public void excluir(@PathVariable Long id) {
         planoService.excluir(id);
     }

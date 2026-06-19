@@ -4,6 +4,7 @@ package dev.backanderson.projetomastersys.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import dev.backanderson.projetomastersys.domain.Usuario;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,11 @@ public class TokenService {
 
     @Value("${jwt.secret}")
     private String secret;
+
+    @PostConstruct
+    public void testeSecret() {
+        System.out.println("JWT_SECRET = " + secret);
+    }
 
     public String gerarToken(Usuario usuario){
         Algorithm algorithm = Algorithm.HMAC256(secret);

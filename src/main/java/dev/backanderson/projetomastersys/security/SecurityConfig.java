@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final SecurityFilter securityFilter;
@@ -32,10 +34,6 @@ public class SecurityConfig {
                                         "/swagger-ui.html",
                                         "/v3/api-docs/**")
                                 .permitAll()
-                                .requestMatchers("/relatorios/**").hasRole("ADMIN")
-                                .requestMatchers("/auth/registrar").hasRole("ADMIN")
-                                .requestMatchers("/usuarios/**").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers("/planos/**").hasAnyRole("ADMIN")
                                 .anyRequest()
                                 .authenticated())
                 .exceptionHandling(exception -> exception
@@ -50,20 +48,6 @@ public class SecurityConfig {
                                       "status": 401,
                                       "erro": "Não autenticado",
                                       "mensagem": "Token ausente ou inválido"
-                                    }
-                                    """);
-                        })
-                        .accessDeniedHandler((request, response, ex) -> {
-
-                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                            response.setContentType("application/json");
-                            response.setCharacterEncoding("UTF-8");
-
-                            response.getWriter().write("""
-                                    {
-                                      "status": 403,
-                                      "erro": "Acesso negado",
-                                      "mensagem": "Você não possui permissão para acessar este recurso"
                                     }
                                     """);
                         })

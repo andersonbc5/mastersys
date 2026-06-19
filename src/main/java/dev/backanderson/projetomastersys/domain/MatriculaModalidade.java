@@ -4,6 +4,7 @@ package dev.backanderson.projetomastersys.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "matriculas_modalidade")
+@EntityListeners(AuditingEntityListener.class)
 public class MatriculaModalidade {
 
     @Id

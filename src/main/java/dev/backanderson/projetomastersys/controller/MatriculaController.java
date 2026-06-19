@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,34 +28,41 @@ public class MatriculaController implements MatriculaControllerDoc {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public MatriculaResponse cadastrar(@RequestBody @Valid MatriculaRequest matriculaRequest) {
         return matriculaService.cadastrar(matriculaRequest);
 
     }
 
+
     @PostMapping("/{id}/gerar-fatura")
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public FaturaMatriculaResponse gerarFatura(@PathVariable Long id) {
         return faturaMatriculaService.gerarFatura(id);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public Page<MatriculaResponse> listar(MatriculaFiltroRequest filtroRequest, Pageable pageable) {
         return matriculaService.listar(filtroRequest, pageable);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public MatriculaResponse buscarPorId(@PathVariable("id") Long id) {
         return matriculaService.buscarPorId(id);
     }
 
     @PatchMapping("/{id}/encerrar")
+    @PreAuthorize("hasRole('ADMIN')")
     public MatriculaResponse encerrarMatricula(@PathVariable("id") Long id) {
         return matriculaService.encerrarMatricula(id);
 
     }
 
     @PatchMapping("/{id}/cancelar")
+    @PreAuthorize("hasRole('ADMIN')")
     public MatriculaResponse cancelarMatricula(@PathVariable("id") Long id) {
         return matriculaService.cancelarMatricula(id);
     }
